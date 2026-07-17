@@ -1,1 +1,452 @@
-a
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBBS Consultant & NEET Advisor | Premium Guidance</title>
+  <!-- Tailwind & Font Awesome CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* custom smooth scroll & glassmorphism */
+    html { scroll-behavior: smooth; }
+    .glass-card {
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    .shadow-premium { box-shadow: 0 20px 50px -8px rgba(0,0,0,0.12); }
+    .card-hover { transition: all 0.25s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -12px rgba(0,0,0,0.18); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-open .faq-answer { max-height: 200px; }
+    .faq-open .faq-chevron { transform: rotate(180deg); }
+    .sticky-form { position: sticky; top: 120px; align-self: start; }
+    @media (max-width: 1024px) { .sticky-form { position: relative; top: 0; } }
+    /* mobile nav */
+    #mobileMenu { display: none; }
+    #mobileMenu.open { display: block; }
+    /* table styles */
+    .college-table { border-collapse: collapse; }
+    .college-table th { background: #f8fafc; font-weight: 600; color: #1e293b; }
+    .college-table td, .college-table th { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+    .college-table tr:hover { background: #f8fafc; }
+    .abroad-card { transition: all 0.3s ease; }
+    .abroad-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -8px rgba(0,0,0,0.12); }
+    /* light orange button */
+    .btn-orange {
+      background: #F97316;
+      transition: all 0.2s ease;
+    }
+    .btn-orange:hover {
+      background: #EA580C;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+  <!-- HEADER (sticky) -->
+  <header class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200/60 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 md:h-20">
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <span class="text-2xl font-bold text-[#0F62FE] tracking-tight">Med<span class="text-gray-800">Admit</span></span>
+        <span class="hidden sm:inline-block text-xs font-medium bg-blue-50 text-[#0F62FE] px-2 py-0.5 rounded-full">NEET</span>
+      </div>
+      <!-- Navigation (desktop) -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+        <a href="#home" class="hover:text-[#0F62FE] transition">Home</a>
+        <a href="#top-colleges" class="hover:text-[#0F62FE] transition">Top Colleges</a>
+        <a href="#about" class="hover:text-[#0F62FE] transition">Why Us</a>
+        <a href="#services" class="hover:text-[#0F62FE] transition">Services</a>
+        <a href="#delhi-colleges" class="hover:text-[#0F62FE] transition">Delhi Colleges</a>
+        <a href="#abroad" class="hover:text-[#0F62FE] transition">Study Abroad</a>
+        <a href="#faq" class="hover:text-[#0F62FE] transition">FAQ</a>
+      </nav>
+      <!-- CTA Button (light orange) -->
+      <div class="flex items-center gap-3">
+        <button id="scrollToFormBtn" class="hidden md:inline-block btn-orange text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all">
+          <i class="fas fa-calendar-check mr-1"></i> Book Free Counselling
+        </button>
+        <button id="mobileToggle" class="md:hidden text-gray-600 text-xl"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden bg-white border-b border-gray-200 px-4 py-2">
+      <a href="#home" class="block py-2 text-gray-700 hover:text-[#0F62FE]">Home</a>
+      <a href="#top-colleges" class="block py-2 text-gray-700 hover:text-[#0F62FE]">Top Colleges</a>
+      <a href="#about" class="block py-2 text-gray-700 hover:text-[#0F62FE]">Why Us</a>
+      <a href="#services" class="block py-2 text-gray-700 hover:text-[#0F62FE]">Services</a>
+      <a href="#delhi-colleges" class="block py-2 text-gray-700 hover:text-[#0F62FE]">Delhi Colleges</a>
+      <a href="#abroad" class="block py-2 text-gray-700 hover:text-[#0F62FE]">Study Abroad</a>
+      <a href="#faq" class="block py-2 text-gray-700 hover:text-[#0F62FE]">FAQ</a>
+      <button id="mobileScrollBtn" class="block mt-2 w-full btn-orange text-white text-center px-4 py-2 rounded-full font-medium">
+        <i class="fas fa-calendar-check mr-1"></i> Book Free Counselling
+      </button>
+    </div>
+  </header>
+
+  <main class="pt-20 md:pt-24">
+
+    <!-- HERO SECTION (contains the form and the new image) -->
+    <section id="home" class="relative overflow-hidden bg-gradient-to-br from-blue-50/80 via-white to-gray-50/80 py-12 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+        <!-- Left content (now includes the study image) -->
+        <div class="lg:col-span-3 space-y-6 pt-4">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight text-gray-800">
+            Get Expert <span class="text-[#0F62FE]">MBBS & NEET</span> Admission Guidance
+          </h1>
+          <p class="text-lg sm:text-xl text-gray-600 max-w-2xl">Helping students secure MBBS seats in India through personalized counselling, college selection, admission support, and documentation assistance.</p>
+          
+          <!-- Buttons -->
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#contact" class="bg-[#0F62FE] hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2"><i class="fas fa-calendar-check"></i> Book Free Consultation</a>
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+          </div>
+
+          <!-- NEW: "Study Doctor" image (stethoscope on books) -->
+          <div class="w-full">
+            <img 
+              src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=800&h=300&fit=crop&crop=center&auto=format" 
+              alt="Medical student studying with stethoscope and books" 
+              class="rounded-2xl shadow-lg w-full object-cover max-h-56 md:max-h-64 border border-white/50"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Trust badges -->
+          <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-700 pt-2">
+            <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-[#0F62FE]"></i> Experienced Advisors</span>
+            <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-[#0F62FE]"></i> NEET UG Guidance</span>
+            <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-[#0F62FE]"></i> MBBS Admission Support</span>
+            <span class="flex items-center gap-1.5"><i class="fas fa-check-circle text-[#0F62FE]"></i> Transparent Process</span>
+          </div>
+        </div>
+
+        <!-- Right Sticky Card (glassmorphism form) -->
+        <div id="consultationFormContainer" class="lg:col-span-2 sticky-form w-full max-w-md mx-auto lg:mx-0">
+          <div class="glass-card rounded-3xl p-6 md:p-8 shadow-premium border border-white/40">
+            <h3 class="text-2xl font-bold text-gray-800 mb-1">Free MBBS Counselling</h3>
+            <p class="text-sm text-gray-500 mb-5">Fill in your details, we'll get back shortly.</p>
+            <!-- Web3Forms -->
+            <form id="consultationForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+              <!-- ⚠️ Replace the access_key value with your own from Web3Forms -->
+              <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+              <input type="hidden" name="subject" value="New MBBS Counselling Request" />
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Full Name *</label>
+                <input type="text" name="name" required class="mt-1 w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F62FE] focus:border-transparent outline-none transition" placeholder="e.g. Ananya Sharma" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Phone Number *</label>
+                <input type="tel" name="phone" required class="mt-1 w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F62FE] focus:border-transparent outline-none transition" placeholder="+91 98765 43210" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email Address <span class="text-gray-400 text-xs">(optional)</span></label>
+                <input type="email" name="email" class="mt-1 w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F62FE] focus:border-transparent outline-none transition" placeholder="you@example.com" />
+              </div>
+              <button type="submit" id="formSubmitBtn" class="w-full bg-[#0F62FE] hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 text-base">
+                <i class="fas fa-paper-plane"></i> Get Free Consultation
+              </button>
+              <div id="formStatus" class="text-sm text-center mt-2 hidden"></div>
+            </form>
+            <p class="text-[10px] text-gray-400 mt-3 text-center">We respect your privacy. No spam.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOP MEDICAL COLLEGES IN INDIA -->
+    <section id="top-colleges" class="py-16 bg-gray-50/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Top Medical Colleges in India</h2>
+        <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12">Leading institutions known for academic excellence and advanced medical training.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover border border-gray-100"><div class="h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-[#0F62FE] text-4xl"><i class="fas fa-hospital"></i></div><div class="p-5"><h4 class="font-bold text-lg">AIIMS Delhi</h4><p class="text-sm text-gray-500 flex items-center gap-1"><i class="fas fa-map-pin text-[#0F62FE]"></i> New Delhi</p><p class="text-sm font-semibold text-gray-700 mt-1">₹ 8L – 25L</p><a href="#" class="inline-block mt-3 text-[#0F62FE] text-sm font-medium hover:underline">View Details →</a></div></div>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover border border-gray-100"><div class="h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-[#0F62FE] text-4xl"><i class="fas fa-hospital"></i></div><div class="p-5"><h4 class="font-bold text-lg">Maulana Azad Medical College</h4><p class="text-sm text-gray-500 flex items-center gap-1"><i class="fas fa-map-pin text-[#0F62FE]"></i> New Delhi</p><p class="text-sm font-semibold text-gray-700 mt-1">₹ 9L – 22L</p><a href="#" class="inline-block mt-3 text-[#0F62FE] text-sm font-medium hover:underline">View Details →</a></div></div>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover border border-gray-100"><div class="h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-[#0F62FE] text-4xl"><i class="fas fa-hospital"></i></div><div class="p-5"><h4 class="font-bold text-lg">KGMU</h4><p class="text-sm text-gray-500 flex items-center gap-1"><i class="fas fa-map-pin text-[#0F62FE]"></i> Lucknow</p><p class="text-sm font-semibold text-gray-700 mt-1">₹ 7L – 20L</p><a href="#" class="inline-block mt-3 text-[#0F62FE] text-sm font-medium hover:underline">View Details →</a></div></div>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover border border-gray-100"><div class="h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-[#0F62FE] text-4xl"><i class="fas fa-hospital"></i></div><div class="p-5"><h4 class="font-bold text-lg">Grant Medical College</h4><p class="text-sm text-gray-500 flex items-center gap-1"><i class="fas fa-map-pin text-[#0F62FE]"></i> Mumbai</p><p class="text-sm font-semibold text-gray-700 mt-1">₹ 6L – 18L</p><a href="#" class="inline-block mt-3 text-[#0F62FE] text-sm font-medium hover:underline">View Details →</a></div></div>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover border border-gray-100"><div class="h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-[#0F62FE] text-4xl"><i class="fas fa-hospital"></i></div><div class="p-5"><h4 class="font-bold text-lg">Kasturba Medical College</h4><p class="text-sm text-gray-500 flex items-center gap-1"><i class="fas fa-map-pin text-[#0F62FE]"></i> Manipal</p><p class="text-sm font-semibold text-gray-700 mt-1">₹ 10L – 30L</p><a href="#" class="inline-block mt-3 text-[#0F62FE] text-sm font-medium hover:underline">View Details →</a></div></div>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover border border-gray-100"><div class="h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-[#0F62FE] text-4xl"><i class="fas fa-hospital"></i></div><div class="p-5"><h4 class="font-bold text-lg">JIPMER</h4><p class="text-sm text-gray-500 flex items-center gap-1"><i class="fas fa-map-pin text-[#0F62FE]"></i> Puducherry</p><p class="text-sm font-semibold text-gray-700 mt-1">₹ 7L – 19L</p><a href="#" class="inline-block mt-3 text-[#0F62FE] text-sm font-medium hover:underline">View Details →</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="about" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Why Choose Us</h2>
+        <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12">Comprehensive support from experts who understand the admission landscape.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+          <div class="bg-gray-50/80 rounded-2xl p-5 text-center card-hover border border-gray-100 shadow-sm"><i class="fas fa-user-md text-[#0F62FE] text-2xl mb-2"></i><p class="text-sm font-medium text-gray-700">Personalized Counselling</p></div>
+          <div class="bg-gray-50/80 rounded-2xl p-5 text-center card-hover border border-gray-100 shadow-sm"><i class="fas fa-chart-line text-[#0F62FE] text-2xl mb-2"></i><p class="text-sm font-medium text-gray-700">College Prediction</p></div>
+          <div class="bg-gray-50/80 rounded-2xl p-5 text-center card-hover border border-gray-100 shadow-sm"><i class="fas fa-university text-[#0F62FE] text-2xl mb-2"></i><p class="text-sm font-medium text-gray-700">State Quota Guidance</p></div>
+          <div class="bg-gray-50/80 rounded-2xl p-5 text-center card-hover border border-gray-100 shadow-sm"><i class="fas fa-hand-holding-usd text-[#0F62FE] text-2xl mb-2"></i><p class="text-sm font-medium text-gray-700">Management Quota</p></div>
+          <div class="bg-gray-50/80 rounded-2xl p-5 text-center card-hover border border-gray-100 shadow-sm"><i class="fas fa-balance-scale text-[#0F62FE] text-2xl mb-2"></i><p class="text-sm font-medium text-gray-700">MCC Counselling</p></div>
+          <div class="bg-gray-50/80 rounded-2xl p-5 text-center card-hover border border-gray-100 shadow-sm"><i class="fas fa-file-alt text-[#0F62FE] text-2xl mb-2"></i><p class="text-sm font-medium text-gray-700">Documentation</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-16 bg-gray-50/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">Our Services</h2>
+        <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12">End-to-end assistance for your medical career.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-stethoscope"></i></div><span class="text-sm font-semibold text-gray-700">NEET Counselling</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-graduation-cap"></i></div><span class="text-sm font-semibold text-gray-700">MBBS Admission</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-building"></i></div><span class="text-sm font-semibold text-gray-700">College Selection</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-university"></i></div><span class="text-sm font-semibold text-gray-700">State Counselling</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-chart-pie"></i></div><span class="text-sm font-semibold text-gray-700">AIQ Counselling</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-file-signature"></i></div><span class="text-sm font-semibold text-gray-700">Documentation</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-check-double"></i></div><span class="text-sm font-semibold text-gray-700">Seat Allotment</span></div>
+          <div class="bg-white rounded-2xl p-5 shadow-sm card-hover border border-gray-100 flex flex-col items-center text-center"><div class="h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center text-[#0F62FE] text-xl mb-3"><i class="fas fa-lightbulb"></i></div><span class="text-sm font-semibold text-gray-700">Career Guidance</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="py-16 bg-white">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Your Admission Journey</h2>
+        <p class="text-gray-500 mb-10">Simple, transparent, and guided at every step.</p>
+        <div class="flex flex-col items-center space-y-0">
+          <div class="flex flex-col items-center w-full"><div class="bg-blue-50 text-[#0F62FE] font-bold rounded-full h-14 w-14 flex items-center justify-center text-lg shadow-sm border-2 border-white">1</div><span class="text-gray-700 font-medium mt-1 mb-2">Register</span><div class="w-0.5 h-8 bg-gray-300"></div></div>
+          <div class="flex flex-col items-center w-full"><div class="bg-blue-50 text-[#0F62FE] font-bold rounded-full h-14 w-14 flex items-center justify-center text-lg shadow-sm border-2 border-white">2</div><span class="text-gray-700 font-medium mt-1 mb-2">Free Counselling</span><div class="w-0.5 h-8 bg-gray-300"></div></div>
+          <div class="flex flex-col items-center w-full"><div class="bg-blue-50 text-[#0F62FE] font-bold rounded-full h-14 w-14 flex items-center justify-center text-lg shadow-sm border-2 border-white">3</div><span class="text-gray-700 font-medium mt-1 mb-2">College Selection</span><div class="w-0.5 h-8 bg-gray-300"></div></div>
+          <div class="flex flex-col items-center w-full"><div class="bg-blue-50 text-[#0F62FE] font-bold rounded-full h-14 w-14 flex items-center justify-center text-lg shadow-sm border-2 border-white">4</div><span class="text-gray-700 font-medium mt-1 mb-2">Documentation</span><div class="w-0.5 h-8 bg-gray-300"></div></div>
+          <div class="flex flex-col items-center w-full"><div class="bg-blue-50 text-[#0F62FE] font-bold rounded-full h-14 w-14 flex items-center justify-center text-lg shadow-sm border-2 border-white">5</div><span class="text-gray-700 font-medium mt-1 mb-2">Admission</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOP MEDICAL COLLEGES IN DELHI WITH FEES (AIQ) -->
+    <section id="delhi-colleges" class="py-16 bg-gray-50/60">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-3">Top Medical Colleges in Delhi with Fees (AIQ)</h2>
+        <p class="text-center text-gray-500 max-w-2xl mx-auto mb-10">Delhi offers some of the best medical colleges in India, including prestigious institutions like AIIMS, Maulana Azad Medical College, and Lady Hardinge Medical College. Below is the list of top government and private medical colleges in Delhi along with their annual fees for All India Quota (AIQ) candidates.</p>
+        <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100">
+          <table class="college-table w-full text-sm">
+            <thead>
+              <tr>
+                <th class="text-left">College Name</th>
+                <th class="text-left">Type</th>
+                <th class="text-left">Annual Fees (AIQ)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>AIIMS Delhi</td><td>Government</td><td>₹ 8,000 – 15,000</td></tr>
+              <tr><td>Maulana Azad Medical College (MAMC)</td><td>Government</td><td>₹ 9,000 – 18,000</td></tr>
+              <tr><td>Lady Hardinge Medical College (LHMC)</td><td>Government</td><td>₹ 8,000 – 16,000</td></tr>
+              <tr><td>University College of Medical Sciences (UCMS)</td><td>Government</td><td>₹ 8,500 – 17,000</td></tr>
+              <tr><td>VMMC & Safdarjung Hospital</td><td>Government</td><td>₹ 9,000 – 18,000</td></tr>
+              <tr><td>Hamdard Institute of Medical Sciences & Research</td><td>Private</td><td>₹ 18,00,000 – 22,00,000</td></tr>
+              <tr><td>Sant Parmanand Hospital</td><td>Private</td><td>₹ 15,00,000 – 20,00,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 text-center">* Fees are indicative and subject to change. Please verify with the respective institution.</p>
+      </div>
+    </section>
+
+    <!-- MBBS ADMISSION IN ABROAD -->
+    <section id="abroad" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-3">MBBS Admission in Abroad</h2>
+        <p class="text-center text-gray-500 max-w-3xl mx-auto mb-6">With over 1,29,603 MBBS seats in India and 24,92,000 NEET aspirants, the competition is fierce. Studying MBBS abroad offers cost-effective programs, English-medium universities, internationally recognized degrees, and a gateway to worldwide opportunities.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+          <div class="bg-gray-50 rounded-xl p-4 text-center shadow-sm abroad-card border border-gray-100"><span class="font-semibold text-gray-800">Russia</span></div>
+          <div class="bg-gray-50 rounded-xl p-4 text-center shadow-sm abroad-card border border-gray-100"><span class="font-semibold text-gray-800">Nepal</span></div>
+          <div class="bg-gray-50 rounded-xl p-4 text-center shadow-sm abroad-card border border-gray-100"><span class="font-semibold text-gray-800">Uzbekistan</span></div>
+          <div class="bg-gray-50 rounded-xl p-4 text-center shadow-sm abroad-card border border-gray-100"><span class="font-semibold text-gray-800">Georgia</span></div>
+          <div class="bg-gray-50 rounded-xl p-4 text-center shadow-sm abroad-card border border-gray-100"><span class="font-semibold text-gray-800">Kazakhstan</span></div>
+          <div class="bg-gray-50 rounded-xl p-4 text-center shadow-sm abroad-card border border-gray-100"><span class="font-semibold text-gray-800">Bangladesh</span></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-gray-50/80 rounded-2xl p-6 shadow-sm card-hover border border-gray-100">
+            <i class="fas fa-globe-asia text-[#0F62FE] text-3xl mb-3"></i>
+            <h4 class="font-bold text-lg mb-1">Cost-Effective Programs</h4>
+            <p class="text-sm text-gray-600">MBBS abroad fees range between <strong>₹ 2 – 5 lakhs</strong> per year, making quality medical education affordable.</p>
+          </div>
+          <div class="bg-gray-50/80 rounded-2xl p-6 shadow-sm card-hover border border-gray-100">
+            <i class="fas fa-language text-[#0F62FE] text-3xl mb-3"></i>
+            <h4 class="font-bold text-lg mb-1">English Medium Universities</h4>
+            <p class="text-sm text-gray-600">Most top medical universities abroad offer courses in English, eliminating language barriers.</p>
+          </div>
+          <div class="bg-gray-50/80 rounded-2xl p-6 shadow-sm card-hover border border-gray-100">
+            <i class="fas fa-award text-[#0F62FE] text-3xl mb-3"></i>
+            <h4 class="font-bold text-lg mb-1">Globally Recognized Degrees</h4>
+            <p class="text-sm text-gray-600">Degrees from accredited universities are recognized by WHO, MCI/NMC, and other global bodies.</p>
+          </div>
+        </div>
+        <div class="mt-8 text-center">
+          <p class="text-gray-600 text-sm max-w-2xl mx-auto">Every year, over <strong>25,000 students</strong> study medicine overseas. With our expert guidance, we ensure a smooth admission process and safe travel. Our team members travel with students in groups for a hassle-free experience.</p>
+          <a href="#consultationFormContainer" class="inline-block mt-5 btn-orange text-white font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all">Get Started Abroad</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-16 bg-gray-50/60">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Student Testimonials</h2>
+        <p class="text-gray-500 mb-10">Real stories from students we've guided.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-6 shadow-sm card-hover border border-gray-100"><div class="flex justify-center text-[#FBBF24] text-lg">★★★★★</div><p class="text-gray-700 text-sm italic my-3">“The counselling was spot on!”</p><div class="font-semibold">Priya S.</div><div class="text-xs text-[#0F62FE]">AIIMS</div></div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm card-hover border border-gray-100"><div class="flex justify-center text-[#FBBF24] text-lg">★★★★★</div><p class="text-gray-700 text-sm italic my-3">“Got my dream college thanks to their support.”</p><div class="font-semibold">Rahul K.</div><div class="text-xs text-[#0F62FE]">KGMU</div></div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm card-hover border border-gray-100"><div class="flex justify-center text-[#FBBF24] text-lg">★★★★★</div><p class="text-gray-700 text-sm italic my-3">“Transparent process, highly recommended.”</p><div class="font-semibold">Anjali M.</div><div class="text-xs text-[#0F62FE]">MAMC</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ ACCORDION -->
+    <section id="faq" class="py-16 bg-white">
+      <div class="max-w-3xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Frequently Asked Questions</h2>
+        <div class="space-y-4" id="faqContainer">
+          <div class="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 faq-item">
+            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100/50 transition">
+              <span>How does NEET counselling work?</span>
+              <i class="fas fa-chevron-down text-[#0F62FE] text-sm faq-chevron"></i>
+            </button>
+            <div class="faq-answer px-6"><p class="py-3 text-gray-600 text-sm border-t border-gray-100">We provide step-by-step guidance from registration to seat allotment.</p></div>
+          </div>
+          <div class="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 faq-item">
+            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100/50 transition">
+              <span>Can you help with private colleges?</span>
+              <i class="fas fa-chevron-down text-[#0F62FE] text-sm faq-chevron"></i>
+            </button>
+            <div class="faq-answer px-6"><p class="py-3 text-gray-600 text-sm border-t border-gray-100">Yes, we assist with management quota and private college admissions.</p></div>
+          </div>
+          <div class="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 faq-item">
+            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100/50 transition">
+              <span>Do you provide state counselling support?</span>
+              <i class="fas fa-chevron-down text-[#0F62FE] text-sm faq-chevron"></i>
+            </button>
+            <div class="faq-answer px-6"><p class="py-3 text-gray-600 text-sm border-t border-gray-100">Absolutely, we handle state quota and AIQ counselling.</p></div>
+          </div>
+          <div class="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 faq-item">
+            <button class="faq-toggle w-full text-left px-6 py-4 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100/50 transition">
+              <span>What are your consultation charges?</span>
+              <i class="fas fa-chevron-down text-[#0F62FE] text-sm faq-chevron"></i>
+            </button>
+            <div class="faq-answer px-6"><p class="py-3 text-gray-600 text-sm border-t border-gray-100">Our initial consultation is completely free.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div><span class="text-2xl font-bold text-white">Med<span class="text-[#0F62FE]">Admit</span></span><p class="text-sm mt-2">Expert MBBS & NEET guidance since 2015.</p></div>
+        <div><h5 class="text-white font-semibold mb-3">Quick Links</h5><ul class="text-sm space-y-1"><li><a href="#home" class="hover:text-white">Home</a></li><li><a href="#top-colleges" class="hover:text-white">Top Colleges</a></li><li><a href="#services" class="hover:text-white">Services</a></li></ul></div>
+        <div><h5 class="text-white font-semibold mb-3">Services</h5><ul class="text-sm space-y-1"><li>NEET Counselling</li><li>MBBS Admission</li><li>Documentation</li></ul></div>
+        <div><h5 class="text-white font-semibold mb-3">Contact</h5><ul class="text-sm space-y-2"><li><i class="fas fa-phone mr-2"></i>+91 98765 43210</li><li><i class="fas fa-envelope mr-2"></i>info@medadmit.in</li><li><i class="fab fa-whatsapp mr-2"></i>+91 98765 43210</li></ul></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-gray-800 mt-8 flex flex-wrap justify-between items-center text-sm">
+        <span>© 2026 MedAdmit. All rights reserved.</span>
+        <div class="flex gap-4 text-gray-400"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-linkedin-in"></i><i class="fab fa-youtube"></i></div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    (function() {
+      // ----- SCROLL TO FORM (both desktop and mobile buttons) -----
+      const scrollToForm = () => {
+        const formContainer = document.getElementById('consultationFormContainer');
+        if (formContainer) {
+          formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      };
+
+      const desktopBtn = document.getElementById('scrollToFormBtn');
+      const mobileBtn = document.getElementById('mobileScrollBtn');
+      if (desktopBtn) desktopBtn.addEventListener('click', scrollToForm);
+      if (mobileBtn) mobileBtn.addEventListener('click', scrollToForm);
+
+      // ----- MOBILE MENU TOGGLE -----
+      const toggleBtn = document.getElementById('mobileToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (toggleBtn && mobileMenu) {
+        toggleBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+        if (mobileBtn) {
+          mobileBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        }
+      }
+
+      // ----- FAQ ACCORDION -----
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const toggle = item.querySelector('.faq-toggle');
+        toggle.addEventListener('click', function() {
+          const isOpen = item.classList.contains('faq-open');
+          faqItems.forEach(other => {
+            if (other !== item) other.classList.remove('faq-open');
+          });
+          item.classList.toggle('faq-open');
+        });
+      });
+
+      // ----- FORM SUBMISSION -----
+      const form = document.getElementById('consultationForm');
+      const status = document.getElementById('formStatus');
+      const btn = document.getElementById('formSubmitBtn');
+
+      if (form) {
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const name = form.querySelector('input[name="name"]').value.trim();
+          const phone = form.querySelector('input[name="phone"]').value.trim();
+          if (!name || !phone) {
+            status.className = 'text-red-500 text-sm text-center mt-2';
+            status.innerText = 'Please fill in all required fields.';
+            status.classList.remove('hidden');
+            return;
+          }
+          status.className = 'text-blue-500 text-sm text-center mt-2';
+          status.innerText = 'Submitting...';
+          status.classList.remove('hidden');
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+          try {
+            const formData = new FormData(form);
+            const response = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              body: formData
+            });
+            const result = await response.json();
+            if (result.success) {
+              status.className = 'text-green-600 text-sm text-center mt-2';
+              status.innerText = '✅ Consultation request sent! We\'ll contact you shortly.';
+              form.reset();
+            } else {
+              throw new Error(result.message || 'Submission failed');
+            }
+          } catch (error) {
+            status.className = 'text-red-500 text-sm text-center mt-2';
+            status.innerText = '⚠️ Something went wrong. Please try again.';
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Get Free Consultation';
+          }
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
