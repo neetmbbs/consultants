@@ -44,6 +44,32 @@
       background: #EA580C;
       box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
     }
+    /* image frame - properly sized */
+    .image-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px -8px rgba(0,0,0,0.12);
+      background: #f0f4ff;
+      width: 100%;
+      height: 220px;
+    }
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.4s ease;
+    }
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+    @media (min-width: 640px) {
+      .image-frame { height: 260px; }
+    }
+    @media (min-width: 1024px) {
+      .image-frame { height: 240px; }
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
@@ -90,19 +116,11 @@
   </header>
 
   <main class="pt-20 md:pt-24">
-         <!-- "Study Doctor" image (stethoscope on books) -->
-          <div class="w-full">
-            <img 
-src="https://github.com/neetmbbs/consultants/blob/main/2.png"
-             
-              loading="lazy"
-            />
-          </div>
 
-    <!-- HERO SECTION (contains the form and the new image) -->
+    <!-- HERO SECTION -->
     <section id="home" class="relative overflow-hidden bg-gradient-to-br from-blue-50/80 via-white to-gray-50/80 py-12 md:py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
-        <!-- Left content (now includes the study image) -->
+        <!-- Left content -->
         <div class="lg:col-span-3 space-y-6 pt-4">
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight text-gray-800">
             Get Expert <span class="text-[#0F62FE]">MBBS & NEET</span> Admission Guidance
@@ -115,7 +133,14 @@ src="https://github.com/neetmbbs/consultants/blob/main/2.png"
             <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
           </div>
 
-     
+          <!-- Image Frame - With New Image -->
+          <div class="image-frame border-2 border-white/60">
+            <img 
+              src="https://plus.unsplash.com/premium_photo-1681843126728-04eab730febe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bXVsdGlwbGUlMjBkb2N0b3JzJTIwaW4lMjBvbmUlMjBmcmFtZXxlbnwwfHwwfHx8MA%3D%3D" 
+              alt="Multiple doctors and medical professionals collaborating" 
+              loading="lazy"
+            />
+          </div>
 
           <!-- Trust badges -->
           <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-700 pt-2">
@@ -131,10 +156,10 @@ src="https://github.com/neetmbbs/consultants/blob/main/2.png"
           <div class="glass-card rounded-3xl p-6 md:p-8 shadow-premium border border-white/40">
             <h3 class="text-2xl font-bold text-gray-800 mb-1">Free MBBS Counselling</h3>
             <p class="text-sm text-gray-500 mb-5">Fill in your details, we'll get back shortly.</p>
-            <!-- Web3Forms - DO NOT CHANGE ANYTHING HERE -->
+            <!-- Web3Forms -->
             <form id="consultationForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
               <!-- ⚠️ REPLACE THIS WITH YOUR ACTUAL WEB3FORMS ACCESS KEY -->
-              <input type="hidden" name="access_key" value="690628ac-8061-4ac8-8140-493c93666352" />
+              <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
               <input type="hidden" name="subject" value="New MBBS Counselling Request" />
               <div>
                 <label class="block text-sm font-medium text-gray-700">Full Name *</label>
@@ -142,7 +167,7 @@ src="https://github.com/neetmbbs/consultants/blob/main/2.png"
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Phone Number *</label>
-                <input type="tel" name="phone" required class="mt-1 w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F62FE] focus:border-transparent outline-none transition" placeholder="+91 9310161058" />
+                <input type="tel" name="phone" required class="mt-1 w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0F62FE] focus:border-transparent outline-none transition" placeholder="+91 98765 43210" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Email Address <span class="text-gray-400 text-xs">(optional)</span></label>
@@ -346,7 +371,7 @@ src="https://github.com/neetmbbs/consultants/blob/main/2.png"
         <div><span class="text-2xl font-bold text-white">Med<span class="text-[#0F62FE]">Admit</span></span><p class="text-sm mt-2">Expert MBBS & NEET guidance since 2015.</p></div>
         <div><h5 class="text-white font-semibold mb-3">Quick Links</h5><ul class="text-sm space-y-1"><li><a href="#home" class="hover:text-white">Home</a></li><li><a href="#top-colleges" class="hover:text-white">Top Colleges</a></li><li><a href="#services" class="hover:text-white">Services</a></li></ul></div>
         <div><h5 class="text-white font-semibold mb-3">Services</h5><ul class="text-sm space-y-1"><li>NEET Counselling</li><li>MBBS Admission</li><li>Documentation</li></ul></div>
-        <div><h5 class="text-white font-semibold mb-3">Contact</h5><ul class="text-sm space-y-2"><li><i class="fas fa-phone mr-2"></i>+91 9310161058</li><li><i class="fas fa-envelope mr-2"></i>info@medadmit.in</li><li><i class="fab fa-whatsapp mr-2"></i>+91 9310161058</li></ul></div>
+        <div><h5 class="text-white font-semibold mb-3">Contact</h5><ul class="text-sm space-y-2"><li><i class="fas fa-phone mr-2"></i>+91 98765 43210</li><li><i class="fas fa-envelope mr-2"></i>info@medadmit.in</li><li><i class="fab fa-whatsapp mr-2"></i>+91 98765 43210</li></ul></div>
       </div>
       <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-gray-800 mt-8 flex flex-wrap justify-between items-center text-sm">
         <span>© 2026 MedAdmit. All rights reserved.</span>
@@ -437,22 +462,4 @@ src="https://github.com/neetmbbs/consultants/blob/main/2.png"
             
             if (result.success) {
               status.className = 'text-green-600 text-sm text-center mt-2';
-              status.innerText = '✅ Consultation request sent! We\'ll contact you shortly.';
-              form.reset();
-            } else {
-              throw new Error(result.message || 'Submission failed');
-            }
-          } catch (error) {
-            status.className = 'text-red-500 text-sm text-center mt-2';
-            status.innerText = '⚠️ Something went wrong. Please try again.';
-          } finally {
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Get Free Consultation';
-          }
-        });
-      }
-    })();
-  </script>
-
-</body>
-</html>
+              status.innerText = '✅ Consultation
