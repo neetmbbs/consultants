@@ -103,11 +103,11 @@
           
           <!-- Buttons -->
           <div class="flex flex-wrap gap-4 pt-2">
-            <a href="#contact" class="bg-[#0F62FE] hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2"><i class="fas fa-calendar-check"></i> Book Free Consultation</a>
+            <a href="#consultationFormContainer" class="bg-[#0F62FE] hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2"><i class="fas fa-calendar-check"></i> Book Free Consultation</a>
             <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
           </div>
 
-          <!-- NEW: "Study Doctor" image (stethoscope on books) -->
+          <!-- "Study Doctor" image (stethoscope on books) -->
           <div class="w-full">
             <img 
               src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=800&h=300&fit=crop&crop=center&auto=format" 
@@ -131,9 +131,9 @@
           <div class="glass-card rounded-3xl p-6 md:p-8 shadow-premium border border-white/40">
             <h3 class="text-2xl font-bold text-gray-800 mb-1">Free MBBS Counselling</h3>
             <p class="text-sm text-gray-500 mb-5">Fill in your details, we'll get back shortly.</p>
-            <!-- Web3Forms -->
+            <!-- Web3Forms - DO NOT CHANGE ANYTHING HERE -->
             <form id="consultationForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-              <!-- ⚠️ Replace the access_key value with your own from Web3Forms -->
+              <!-- ⚠️ REPLACE THIS WITH YOUR ACTUAL WEB3FORMS ACCESS KEY -->
               <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
               <input type="hidden" name="subject" value="New MBBS Counselling Request" />
               <div>
@@ -400,7 +400,7 @@
         });
       });
 
-      // ----- FORM SUBMISSION -----
+      // ----- FORM SUBMISSION (Web3Forms) -----
       const form = document.getElementById('consultationForm');
       const status = document.getElementById('formStatus');
       const btn = document.getElementById('formSubmitBtn');
@@ -408,14 +408,19 @@
       if (form) {
         form.addEventListener('submit', async function(e) {
           e.preventDefault();
+          
+          // Client-side validation
           const name = form.querySelector('input[name="name"]').value.trim();
           const phone = form.querySelector('input[name="phone"]').value.trim();
+          
           if (!name || !phone) {
             status.className = 'text-red-500 text-sm text-center mt-2';
             status.innerText = 'Please fill in all required fields.';
             status.classList.remove('hidden');
             return;
           }
+
+          // Show loading state
           status.className = 'text-blue-500 text-sm text-center mt-2';
           status.innerText = 'Submitting...';
           status.classList.remove('hidden');
@@ -429,6 +434,7 @@
               body: formData
             });
             const result = await response.json();
+            
             if (result.success) {
               status.className = 'text-green-600 text-sm text-center mt-2';
               status.innerText = '✅ Consultation request sent! We\'ll contact you shortly.';
